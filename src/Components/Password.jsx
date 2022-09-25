@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+   lowerCaseLetters,
+   upperCaseLetters,
+   numbersZeroToNine,
+   selectedSpecialCharacters,
+} from "../Options/passwordOptions";
 
 function PassWordView() {
+   const [currentPassword, setPassword] = useState("");
+   const [passwordlength, setPasswordLength] = useState(8);
+   const [passwordlowercase, setPasswordLowercase] = useState("on");
+   const [passworduppercase, setPasswordUppercase] = useState("on");
+   const [passwordnumbers, setPassWordNumbers] = useState("on");
+   const [passwordspecial, setPasswordSpecialCharacters] = useState("on");
+
+   function handleSubmit(event) {
+      console.log(
+         passwordlength,
+         passwordlowercase,
+         passworduppercase,
+         passwordnumbers,
+         passwordspecial
+      );
+      event.preventDefault();
+   }
+
    return (
       <div className="PasswordDiv">
          <h1>Strong password generator</h1>
@@ -11,15 +35,19 @@ function PassWordView() {
 
          <div className="Password-settings">
             <p>Please select options to help generate strong password:</p>
-            <form action="/" className="password-form ">
+            <form action="" className="password-form">
                <div className="row password-inputs">
                   <div className="col-lg-3">
                      <label>Password length:</label>
                   </div>
                   <div className="col-lg-3">
                      <input
+                        onChange={(event) =>
+                           setPasswordLength(event.target.value)
+                        }
                         name="password-length"
                         type="number"
+                        vlaue={passwordlength}
                         max="10"
                         min={8}
                         placeholder="8"
@@ -33,7 +61,14 @@ function PassWordView() {
                      <label>Lowercase characters:</label>
                   </div>
                   <div className="col-lg-3">
-                     <input name="password-lowercase" type="checkbox"></input>
+                     <input
+                        onChange={(event) =>
+                           setPasswordLowercase(event.target.value)
+                        }
+                        value={passwordlowercase}
+                        name="password-lowercase"
+                        type="checkbox"
+                     ></input>
                   </div>
                </div>
 
@@ -42,7 +77,14 @@ function PassWordView() {
                      <label>Uppercase characters</label>
                   </div>
                   <div className="col-lg-3">
-                     <input name="password-uppercase" type="checkbox"></input>
+                     <input
+                        onChange={(event) =>
+                           setPasswordUppercase(event.target.value)
+                        }
+                        value={passworduppercase}
+                        name="password-uppercase"
+                        type="checkbox"
+                     ></input>
                   </div>
                </div>
 
@@ -51,7 +93,14 @@ function PassWordView() {
                      <label>Numbers:</label>
                   </div>
                   <div className="col-lg-3">
-                     <input name="password-numbers" type="checkbox"></input>
+                     <input
+                        onChange={(event) =>
+                           setPassWordNumbers(event.target.value)
+                        }
+                        vlaue={passwordnumbers}
+                        name="password-numbers"
+                        type="checkbox"
+                     ></input>
                   </div>
                </div>
 
@@ -60,11 +109,22 @@ function PassWordView() {
                      <label>Special Characters:</label>
                   </div>
                   <div className="col-lg-3">
-                     <input name="password-special" type="checkbox"></input>
+                     <input
+                        onChange={(event) =>
+                           setPasswordSpecialCharacters(event.target.value)
+                        }
+                        vlaue={passwordspecial}
+                        name="password-special"
+                        type="checkbox"
+                     ></input>
                   </div>
                </div>
 
-               <button type="submit" class="btn btn-primary">
+               <button
+                  onClick={handleSubmit}
+                  type="submit"
+                  className="btn btn-primary"
+               >
                   Get Password
                </button>
             </form>
@@ -73,6 +133,7 @@ function PassWordView() {
             <div className="row">
                <h3 className="col-lg-3">You can use: </h3>
                <input
+                  value={currentPassword}
                   className="col-lg-3"
                   readOnly="readOnly"
                   id="new_password"
