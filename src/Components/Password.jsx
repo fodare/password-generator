@@ -15,15 +15,33 @@ function PassWordView() {
    const [passwordnumbers, setPassWordNumbers] = useState(Boolean);
    const [passwordspecial, setPasswordSpecialCharacters] = useState(Boolean);
 
+   function generatePassword(
+      passwordlength,
+      lowerCaseLetters,
+      upperCaseLetters,
+      numbersZeroToNine,
+      selectedSpecialCharacters
+   ) {
+      var password = [];
+      for (var i = 0; i < passwordlength; i++) {
+         var x = Math.floor(Math.random() * passwordlength);
+         password.push(lowerCaseLetters[x]);
+      }
+      var passwordToString = "";
+      password.forEach((x) => (passwordToString += x));
+      return passwordToString;
+   }
+
    function handleSubmit(event) {
       event.preventDefault();
-      console.log(
+      let newPassword = generatePassword(
          passwordlength,
-         passwordlowercase,
-         passworduppercase,
-         passwordnumbers,
-         passwordspecial
+         lowerCaseLetters,
+         upperCaseLetters,
+         numbersZeroToNine,
+         selectedSpecialCharacters
       );
+      setPassword(newPassword);
    }
 
    return (
