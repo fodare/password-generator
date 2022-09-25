@@ -4,7 +4,7 @@ import {
    upperCaseLetters,
    numbersZeroToNine,
    selectedSpecialCharacters,
-} from "../Options/passwordOptions";
+} from "./passwordOptions";
 
 function PassWordView() {
    const [currentPassword, setPassword] = useState("");
